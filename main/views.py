@@ -25,7 +25,6 @@ def lead_capture(request):
             data = json.loads(request.body.decode("utf-8"))
             name = data.get("name")
             customer_type = data.get("customer_type")
-            email = data.get("order")
             order = data.get("order")
             order_type = data.get("order_type")
             governorate = data.get("governorate")
@@ -33,7 +32,6 @@ def lead_capture(request):
             Lead.objects.create(
                 name=name,
                 customer_type=customer_type,
-                email=email,
                 order=order,
                 order_type=order_type,
                 governorate=governorate,
