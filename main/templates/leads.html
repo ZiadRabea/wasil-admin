@@ -121,18 +121,20 @@
         <tr>
           <th>Organization</th>
           <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
+          <th>Order</th>
+          <th>Type</th>
+          <th>Gov</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         {%for lead in leads%}
         <tr>
-          <td>{{lead.school}}</td>
+          <td>{{lead.customer_type}}</td>
           <td>{{lead.name}}</td>
-          <td>{{lead.email}}</td>
-          <td>{{lead.phone}}</td>
+          <td>{{lead.order}}</td>
+          <td>{{lead.order_type}}</td>
+          <td>{{lead.governorate}}</td>
           <td>
             <div class="status {{lead.state|lower}}">{{lead.state}}</div>
             <div class="dropdown">

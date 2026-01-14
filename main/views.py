@@ -14,6 +14,8 @@ import requests
 from .models import Lead
 
 
+def home(request):
+    return redirect("/")
 
 @csrf_exempt
 @require_POST
@@ -22,41 +24,22 @@ def lead_capture(request):
         try:
             data = json.loads(request.body.decode("utf-8"))
             name = data.get("name")
-            school = data.get("school")
-            email = data.get("email")
-            phone = data.get("phone")
-
+            customer_type = data.get("customer_type")
+            email = data.get("order")
+            order = data.get("order")
+            order_type = data.get("order_type")
+            governorate = data.get("governorate")
             # 1. Save to DB
             Lead.objects.create(
                 name=name,
-                school=school,
+                customer_type=customer_type,
                 email=email,
-                phone=phone,
+                order=order,
+                order_type=order_type,
+                governorate=governorate,
                 created_at=timezone.now(),
                 state="Lead"
             )
-
-            # 2. PDF file URL (Google Drive direct download)
-
-            subject = "🎉 Thanks for booking a demo with Robomay"
-            message = (
-                f"Hello {name},\n\n"
-                f"Thank you for ordering a Robomay 🚀\n\n"
-                f"Our team will reach out to you shortly.\n\n"
-                f"- Robomay Team"
-            )
-
-            # 3. Try attaching the PDF from URL
-
-            email_message = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email="opindustries5@gmail.com",
-                to=[email],
-            )
-
-            email_message.send(fail_silently=False)
-
     
             return JsonResponse({"status": "success"}, status=200)
 
